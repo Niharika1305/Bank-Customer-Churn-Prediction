@@ -1,0 +1,416 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction Result | ChurnSense AI{% endblock %}
+
+{% block content %}
+
+<section class="result-page">
+
+    <div class="result-container">
+
+        <!-- ==================================================
+             PAGE HEADER
+        ================================================== -->
+
+        <div class="result-header">
+
+            <div class="result-badge">
+                <span class="badge-dot"></span>
+                PREDICTION RESULT
+            </div>
+
+            <h1>Customer Churn Analysis</h1>
+
+            {% if all_models %}
+
+                <p>
+                    ChurnSense AI has analyzed the customer using
+                    <strong>all available machine learning models.</strong>
+                </p>
+
+            {% else %}
+
+                <p>
+                    ChurnSense AI has analyzed the customer using
+                    <strong>{{ model_name }}</strong>.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- ==================================================
+             ALL MODELS RESULT
+        ================================================== -->
+
+        {% if all_models %}
+
+        <div class="result-card all-models-card">
+
+            <!-- Overall Result -->
+
+            <div class="overall-result">
+
+                {% if high_risk_count > low_risk_count %}
+
+                    <div class="result-icon danger">
+                        !
+                    </div>
+
+                    <span class="result-status danger-text">
+                        HIGH RISK
+                    </span>
+
+                    <h2>Customer Likely to Churn</h2>
+
+                    <p>
+                        Most machine learning models indicate that
+                        this customer has a higher likelihood of leaving
+                        the bank.
+                    </p>
+
+                {% else %}
+
+                    <div class="result-icon success">
+                        ✓
+                    </div>
+
+                    <span class="result-status success-text">
+                        LOW RISK
+                    </span>
+
+                    <h2>Customer Likely to Stay</h2>
+
+                    <p>
+                        Most machine learning models indicate that
+                        this customer is likely to remain with the bank.
+                    </p>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- ==================================================
+                 MODEL VOTING SUMMARY
+            ================================================== -->
+
+            <div class="voting-section">
+
+                <div class="section-heading">
+
+                    <span class="section-heading-icon">
+                        ✓
+                    </span>
+
+                    <div>
+                        <h3>Model Voting Summary</h3>
+
+                        <p>
+                            Combined prediction from all available models
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="voting-grid">
+
+                    <div class="voting-card high-risk-card">
+
+                        <span class="voting-number">
+                            {{ high_risk_count }}
+                        </span>
+
+                        <span class="voting-label">
+                            High Risk Predictions
+                        </span>
+
+                    </div>
+
+
+                    <div class="voting-card low-risk-card">
+
+                        <span class="voting-number">
+                            {{ low_risk_count }}
+                        </span>
+
+                        <span class="voting-label">
+                            Low Risk Predictions
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================================
+                 MODEL COMPARISON
+            ================================================== -->
+
+            <div class="comparison-section">
+
+                <div class="section-heading">
+
+                    <span class="section-heading-icon">
+                        AI
+                    </span>
+
+                    <div>
+                        <h3>Model Comparison</h3>
+
+                        <p>
+                            Prediction and estimated churn probability
+                            for each model
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="comparison-table-wrapper">
+
+                    <table class="comparison-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Model</th>
+
+                                <th>Prediction</th>
+
+                                <th>Churn Probability</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for item in all_results %}
+
+                            <tr>
+
+                                <td>
+
+                                    <div class="model-name">
+                                        <span class="model-indicator"></span>
+
+                                        <strong>
+                                            {{ item.model }}
+                                        </strong>
+                                    </div>
+
+                                </td>
+
+
+                                <td>
+
+                                    {% if item.prediction == 1 %}
+
+                                        <span class="prediction-badge high-risk">
+                                            HIGH RISK
+                                        </span>
+
+                                    {% else %}
+
+                                        <span class="prediction-badge low-risk">
+                                            LOW RISK
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+
+                                <td>
+
+                                    {% if item.probability is not none %}
+
+                                        <div class="probability-cell">
+
+                                            <strong>
+                                                {{ "%.2f"|format(item.probability * 100) }}%
+                                            </strong>
+                                            
+                                            <div class="probability-bar">
+                                                <span
+                                                class="probability-fill"
+                                                data-probability="{{ item.probability * 100 }}">
+                                            </span>
+                                        </div>
+
+                                        </div>
+
+                                    {% else %}
+
+                                        <span class="not-available">
+                                            N/A
+                                        </span>
+
+                                    {% endif %}
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+
+            <!-- ==================================================
+                 ACTION BUTTONS
+            ================================================== -->
+
+            <div class="result-actions">
+
+                <a href="/predict" class="btn">
+                    Make Another Prediction
+                </a>
+
+                <a href="/" class="secondary-btn">
+                    Back to Home
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==================================================
+             SINGLE MODEL RESULT
+        ================================================== -->
+
+        {% else %}
+
+        <div class="result-card single-model-card">
+
+            <!-- Result Status -->
+
+            {% if prediction == 1 %}
+
+                <div class="result-icon danger">
+                    !
+                </div>
+
+                <span class="result-status danger-text">
+                    HIGH RISK
+                </span>
+
+                <h2>
+                    Customer Likely to Churn
+                </h2>
+
+                <p class="result-description">
+                    The selected machine learning model predicts
+                    that this customer has a higher likelihood
+                    of leaving the bank.
+                </p>
+
+            {% else %}
+
+                <div class="result-icon success">
+                    ✓
+                </div>
+
+                <span class="result-status success-text">
+                    LOW RISK
+                </span>
+
+                <h2>
+                    Customer Likely to Stay
+                </h2>
+
+                <p class="result-description">
+                    The selected machine learning model predicts
+                    that this customer is likely to remain with
+                    the bank.
+                </p>
+
+            {% endif %}
+
+
+            <!-- ==================================================
+                 PROBABILITY
+            ================================================== -->
+
+            {% if probability is not none %}
+
+            <div class="probability-section">
+
+                <p class="probability-label">
+                    Estimated Churn Probability
+                </p>
+
+                <div class="probability-value">
+                    {{ "%.2f"|format(probability * 100) }}%
+                </div>
+
+                <div class="main-probability-bar">
+                    <span
+                    class="main-probability-fill"
+                    data-probability="{{ probability * 100 }}">
+                </span>
+            </div>
+                <div class="probability-scale">
+                    <span>0% — Low Risk</span>
+                    <span>100% — High Risk</span>
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+            <!-- ==================================================
+                 MODEL USED
+            ================================================== -->
+
+            <div class="model-used">
+
+                <span>MODEL USED</span>
+
+                <strong>
+                    {{ model_name }}
+                </strong>
+
+            </div>
+
+
+            <!-- ==================================================
+                 ACTIONS
+            ================================================== -->
+
+            <div class="result-actions">
+
+                <a href="/predict" class="btn">
+                    Make Another Prediction
+                </a>
+
+                <a href="/" class="secondary-btn">
+                    Back to Home
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

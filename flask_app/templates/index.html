@@ -1,0 +1,1354 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home | ChurnSense AI
+{% endblock %}
+
+{% block content %}
+
+<!-- =========================================================
+     HERO SECTION
+========================================================= -->
+
+<section class="hero">
+
+    <!-- Left Side -->
+    <div class="hero-left">
+
+        <img
+            src="{{ url_for('static', filename='images/logo.png') }}"
+            alt="ChurnSense AI Logo"
+            class="hero-logo"
+        >
+
+        <h1>
+            Predict Customer Churn <br>
+            Using Explainable AI
+        </h1>
+
+        <h2>
+            AI-Powered Customer Retention Platform
+        </h2>
+
+        <p>
+            ChurnSense AI enables banks and financial institutions
+            to identify customers at risk of leaving using Machine
+            Learning, Explainable AI (SHAP), and predictive analytics.
+        </p>
+
+        <a href="{{ url_for('predict') }}" class="btn">
+            Start Prediction
+        </a>
+
+    </div>
+
+
+    <!-- Right Side -->
+    <div class="hero-right">
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-header">
+
+                <h3>
+                    Live AI Prediction
+                </h3>
+
+                <span class="status">
+                    ● Online
+                </span>
+
+            </div>
+
+
+            <div class="prediction-box">
+
+                <p>
+                    Customer ID
+                </p>
+
+                <h2>
+                    #12847
+                </h2>
+
+            </div>
+
+
+            <div class="prediction-result">
+
+                <p>
+                    Churn Probability
+                </p>
+
+                <h1>
+                    82%
+                </h1>
+
+                <span class="high-risk">
+                    High Risk
+                </span>
+
+            </div>
+
+
+            <div class="stats">
+
+                <!-- Accuracy -->
+                <div class="stat-card">
+
+                    <h3>
+                        Accuracy
+                    </h3>
+
+                    <p>
+                        86.40%
+                    </p>
+
+                </div>
+
+
+                <!-- Best Model -->
+                <div class="stat-card">
+
+                    <h3>
+                        Best Model
+                    </h3>
+
+                    <p>
+                        Random Forest
+                    </p>
+
+                </div>
+
+
+                <!-- Explainability -->
+                <div class="stat-card">
+
+                    <h3>
+                        Explainability
+                    </h3>
+
+                    <p>
+                        SHAP
+                    </p>
+
+                </div>
+
+
+                <!-- Status -->
+                <div class="stat-card">
+
+                    <h3>
+                        Status
+                    </h3>
+
+                    <p>
+                        Active
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     MODEL EVALUATION SECTION
+========================================================= -->
+
+<section class="model-evaluation">
+
+    <div class="model-container">
+
+
+        <!-- =====================================================
+             SECTION HEADER
+        ====================================================== -->
+
+        <div class="model-header">
+
+            <span class="model-label">
+                MODEL EVALUATION
+            </span>
+
+            <h2>
+                How Well Does ChurnSense AI Perform?
+            </h2>
+
+            <p>
+                Five machine learning models were trained and evaluated
+                using multiple performance measures. These results help
+                determine which model provides the most suitable balance
+                of prediction quality and churn detection.
+            </p>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             PERFORMANCE HIGHLIGHTS
+        ====================================================== -->
+
+        <div class="evaluation-stats">
+
+
+            <!-- Overall Accuracy -->
+            <div class="evaluation-card">
+
+                <span class="evaluation-value">
+                    86.40%
+                </span>
+
+                <h3>
+                    Overall Accuracy
+                </h3>
+
+                <span class="metric-label">
+                    Accuracy
+                </span>
+
+                <p>
+                    The percentage of customers the recommended model
+                    classified correctly overall.
+                </p>
+
+            </div>
+
+
+            <!-- Customer Separation -->
+            <div class="evaluation-card">
+
+                <span class="evaluation-value">
+                    85.65%
+                </span>
+
+                <h3>
+                    Customer Separation
+                </h3>
+
+                <span class="metric-label">
+                    ROC-AUC
+                </span>
+
+                <p>
+                    Shows how well the model distinguishes customers
+                    who may leave from those likely to stay.
+                </p>
+
+            </div>
+
+
+            <!-- Churn Detection -->
+            <div class="evaluation-card">
+
+                <span class="evaluation-value">
+                    45%
+                </span>
+
+                <h3>
+                    Churn Detection
+                </h3>
+
+                <span class="metric-label">
+                    Recall
+                </span>
+
+                <p>
+                    Shows how many of the customers who actually left
+                    were successfully identified by the model.
+                </p>
+
+            </div>
+
+
+            <!-- Prediction Balance -->
+            <div class="evaluation-card">
+
+                <span class="evaluation-value">
+                    57%
+                </span>
+
+                <h3>
+                    Prediction Balance
+                </h3>
+
+                <span class="metric-label">
+                    F1 Score
+                </span>
+
+                <p>
+                    Provides a balance between identifying churners
+                    and avoiding incorrect churn predictions.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ==========================================
+             RECOMMENDED MODEL
+        ========================================== -->
+
+        <div class="selected-model">
+
+            <div class="selected-model-content">
+
+                <span class="selected-label">
+                    RECOMMENDED MODEL
+                </span>
+
+                <h3>
+                    Random Forest
+                </h3>
+
+                <p>
+                    Random Forest achieved the highest ROC-AUC score
+                    among the evaluated models and also delivered
+                    the joint-highest accuracy of 86.40%.
+                </p>
+
+            </div>
+
+
+            <div class="selected-model-score">
+
+                <span>
+                    ROC-AUC
+                </span>
+
+                <strong>
+                    85.65%
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             DETAILED MODEL COMPARISON
+        ====================================================== -->
+
+        <div class="model-comparison">
+
+            <div class="comparison-header">
+
+                <h3>
+                    Detailed Model Comparison
+                </h3>
+
+                <p>
+                    Comparison of all five classification models
+                    evaluated during the project.
+                </p>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table class="model-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Model
+                            </th>
+
+                            <th>
+                                Accuracy
+                            </th>
+
+                            <th>
+                                ROC-AUC
+                            </th>
+
+                            <th>
+                                Churn Recall
+                            </th>
+
+                            <th>
+                                F1 Score
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                        <!-- Logistic Regression -->
+
+                        <tr>
+
+                            <td>
+                                Logistic Regression
+                            </td>
+
+                            <td>
+                                80.80%
+                            </td>
+
+                            <td>
+                                77.48%
+                            </td>
+
+                            <td>
+                                19%
+                            </td>
+
+                            <td>
+                                28%
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- KNN -->
+
+                        <tr>
+
+                            <td>
+                                KNN
+                            </td>
+
+                            <td>
+                                85.35%
+                            </td>
+
+                            <td>
+                                84.41%
+                            </td>
+
+                            <td>
+                                35%
+                            </td>
+
+                            <td>
+                                49%
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- Decision Tree -->
+
+                        <tr>
+
+                            <td>
+                                Decision Tree
+                            </td>
+
+                            <td>
+                                85.45%
+                            </td>
+
+                            <td>
+                                83.04%
+                            </td>
+
+                            <td>
+                                48%
+                            </td>
+
+                            <td>
+                                58%
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- Random Forest -->
+
+                        <tr class="best-model">
+
+                            <td>
+
+                                <strong>
+                                    Random Forest
+                                </strong>
+
+                                <span class="best-badge">
+                                    Recommended
+                                </span>
+
+                            </td>
+
+                            <td>
+
+                                <strong>
+                                    86.40%
+                                </strong>
+
+                            </td>
+
+                            <td>
+
+                                <strong>
+                                    85.65%
+                                </strong>
+
+                            </td>
+
+                            <td>
+                                45%
+                            </td>
+
+                            <td>
+                                57%
+                            </td>
+
+                        </tr>
+
+
+
+                        <!-- SVM -->
+
+                        <tr>
+
+                            <td>
+                                SVM
+                            </td>
+
+                            <td>
+                                86.40%
+                            </td>
+
+                            <td>
+                                82.62%
+                            </td>
+
+                            <td>
+                                43%
+                            </td>
+
+                            <td>
+                                57%
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================================================
+             METRIC EXPLANATION
+        ====================================================== -->
+
+        <div class="metric-note">
+
+            <strong>
+                Understanding the metrics
+            </strong>
+
+            <span>
+
+                <b>Accuracy</b>
+                shows the percentage of overall correct predictions.
+
+                <b>ROC-AUC</b>
+                indicates how well the model separates customers
+                likely to churn from those likely to stay.
+
+                <b>Recall</b>
+                shows how many actual churners were identified.
+
+                <b>F1 Score</b>
+                balances precision and recall into a single measure.
+
+            </span>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= ABOUT SECTION ================= -->
+
+<section id="about" class="about-section">
+
+    <div class="about-container">
+
+
+        <!-- About Header -->
+
+        <div class="about-header">
+
+            <span class="section-label">
+                ABOUT CHURNSENSE AI
+            </span>
+
+            <h2>
+                Intelligent Customer Churn Analysis
+            </h2>
+
+            <p class="about-intro">
+                ChurnSense AI is a machine learning based customer churn
+                prediction platform designed to help identify customers who
+                may be at risk of leaving a bank.
+            </p>
+
+        </div>
+
+
+
+        <!-- Introduction Highlight -->
+
+        <div class="about-highlight">
+
+            <div class="highlight-line"></div>
+
+            <p>
+                By analyzing important customer information such as credit
+                score, age, tenure, account balance, number of products,
+                estimated salary, geography, credit card ownership, and
+                membership activity, the system estimates the likelihood
+                of customer churn.
+            </p>
+
+        </div>
+
+
+
+        <!-- Information Sections -->
+
+        <div class="about-content">
+
+
+            <!-- How It Works -->
+
+            <div class="about-block">
+
+                <div class="about-block-heading">
+
+                    <span>
+                        01
+                    </span>
+
+                    <h3>
+                        How ChurnSense AI Works
+                    </h3>
+
+                </div>
+
+                <p>
+                    The application uses multiple machine learning
+                    classification models to analyze customer data and
+                    generate churn predictions. Users can select an
+                    individual model or compare predictions from all
+                    available models.
+                </p>
+
+                <p>
+                    When multiple models are selected, ChurnSense AI
+                    provides a model-wise comparison along with estimated
+                    churn probabilities, making it easier to understand
+                    how different models evaluate the same customer.
+                </p>
+
+            </div>
+
+
+
+            <!-- Why Churn Matters -->
+
+            <div class="about-block">
+
+                <div class="about-block-heading">
+
+                    <span>
+                        02
+                    </span>
+
+                    <h3>
+                        Why Customer Churn Matters
+                    </h3>
+
+                </div>
+
+                <p>
+                    Customer retention is an important factor for banks
+                    and financial institutions. Identifying customers who
+                    may be likely to leave can help organizations
+                    understand potential risks and take appropriate
+                    retention measures.
+                </p>
+
+                <p>
+                    ChurnSense AI provides a simple and interactive way
+                    to explore these predictions through a user-friendly
+                    web interface.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- Key Highlights -->
+
+        <div class="about-highlights">
+
+            <div class="about-stat">
+
+                <strong>
+                    5
+                </strong>
+
+                <span>
+                    Machine Learning Models
+                </span>
+
+            </div>
+
+
+            <div class="about-stat">
+
+                <strong>
+                    AI
+                </strong>
+
+                <span>
+                    Powered Churn Analysis
+                </span>
+
+            </div>
+
+
+            <div class="about-stat">
+
+                <strong>
+                    100%
+                </strong>
+
+                <span>
+                    Interactive Web Interface
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Machine Learning Models -->
+
+        <div class="models-section">
+
+            <div class="models-heading">
+
+                <span class="section-label">
+                    MACHINE LEARNING
+                </span>
+
+                <h3>
+                    Models Used for Prediction
+                </h3>
+
+                <p>
+                    ChurnSense AI allows customer predictions to be
+                    evaluated using multiple classification algorithms.
+                </p>
+
+            </div>
+
+
+            <div class="models-list">
+
+                <div class="model-item">
+
+                    <span>
+                        01
+                    </span>
+
+                    <strong>
+                        Logistic Regression
+                    </strong>
+
+                </div>
+
+
+                <div class="model-item">
+
+                    <span>
+                        02
+                    </span>
+
+                    <strong>
+                        K-Nearest Neighbors
+                    </strong>
+
+                </div>
+
+
+                <div class="model-item">
+
+                    <span>
+                        03
+                    </span>
+
+                    <strong>
+                        Decision Tree
+                    </strong>
+
+                </div>
+
+
+                <div class="model-item">
+
+                    <span>
+                        04
+                    </span>
+
+                    <strong>
+                        Random Forest
+                    </strong>
+
+                </div>
+
+
+                <div class="model-item">
+
+                    <span>
+                        05
+                    </span>
+
+                    <strong>
+                        Support Vector Machine
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+<!-- ==================== END ABOUT SECTION ==================== -->
+
+
+
+<!-- =========================================================
+     FEATURES SECTION
+========================================================= -->
+
+<section id="features" class="features-section">
+
+    <div class="features-container">
+
+
+        <!-- Section Heading -->
+
+        <div class="features-header">
+
+            <span class="section-label">
+                FEATURES
+            </span>
+
+            <h2>
+                Powerful Features for Smarter Churn Analysis
+            </h2>
+
+            <p>
+                ChurnSense AI combines multiple machine learning models with an
+                interactive web interface to make customer churn prediction
+                simple, clear, and easy to understand.
+            </p>
+
+        </div>
+
+
+
+        <!-- Features Grid -->
+
+        <div class="features-grid">
+
+
+            <!-- Feature 01 -->
+
+            <div class="feature-card">
+
+                <div class="feature-number">
+                    01
+                </div>
+
+                <div class="feature-content">
+
+                    <h3>
+                        Multiple ML Models
+                    </h3>
+
+                    <p>
+                        Analyze customer churn using five different machine
+                        learning classification models and evaluate their
+                        predictions.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Feature 02 -->
+
+            <div class="feature-card">
+
+                <div class="feature-number">
+                    02
+                </div>
+
+                <div class="feature-content">
+
+                    <h3>
+                        Churn Probability
+                    </h3>
+
+                    <p>
+                        View the estimated probability of customer churn to
+                        better understand the level of potential risk.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Feature 03 -->
+
+            <div class="feature-card">
+
+                <div class="feature-number">
+                    03
+                </div>
+
+                <div class="feature-content">
+
+                    <h3>
+                        Model Comparison
+                    </h3>
+
+                    <p>
+                        Compare predictions and estimated churn probabilities
+                        from multiple models on the same customer data.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Feature 04 -->
+
+            <div class="feature-card">
+
+                <div class="feature-number">
+                    04
+                </div>
+
+                <div class="feature-content">
+
+                    <h3>
+                        Instant Predictions
+                    </h3>
+
+                    <p>
+                        Enter customer information and receive machine learning
+                        predictions quickly through the interactive interface.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Feature 05 -->
+
+            <div class="feature-card">
+
+                <div class="feature-number">
+                    05
+                </div>
+
+                <div class="feature-content">
+
+                    <h3>
+                        Risk Classification
+                    </h3>
+
+                    <p>
+                        Predictions are presented clearly as Low Risk or High
+                        Risk to make the results easier to understand.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Feature 06 -->
+
+            <div class="feature-card">
+
+                <div class="feature-number">
+                    06
+                </div>
+
+                <div class="feature-content">
+
+                    <h3>
+                        Interactive Web Interface
+                    </h3>
+
+                    <p>
+                        Use a clean and user-friendly interface to enter customer
+                        details, select models, and explore prediction results.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Feature 07 -->
+
+            <div class="feature-card">
+
+                <div class="feature-number">
+                    07
+                </div>
+
+                <div class="feature-content">
+
+                    <h3>
+                        Model-wise Results
+                    </h3>
+
+                    <p>
+                        When multiple models are selected, the system displays
+                        individual predictions and churn probabilities for each model.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Feature 08 -->
+
+            <div class="feature-card">
+
+                <div class="feature-number">
+                    08
+                </div>
+
+                <div class="feature-content">
+
+                    <h3>
+                        Flexible Model Selection
+                    </h3>
+
+                    <p>
+                        Select a specific machine learning model or analyze the
+                        customer using all available models.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= CONTACT SECTION ================= -->
+
+<section id="contact" class="contact-section">
+
+    <div class="contact-container">
+
+
+        <!-- Contact Header -->
+
+        <div class="contact-header">
+
+            <span class="section-label">
+                CONTACT CHURNSENSE AI
+            </span>
+
+            <h2>
+                Let's Connect & Explore ChurnSense AI
+            </h2>
+
+            <p>
+                Have a question about the project, its machine learning models,
+                or how customer churn prediction works? Feel free to get in touch.
+            </p>
+
+        </div>
+
+
+
+        <!-- Contact Content -->
+
+        <div class="contact-content">
+
+
+            <!-- Left Information -->
+
+            <div class="contact-info">
+
+                <div class="contact-info-heading">
+
+                    <span class="contact-line"></span>
+
+                    <div>
+
+                        <h3>
+                            Get in Touch
+                        </h3>
+
+                        <p>
+                            ChurnSense AI is designed to make customer churn
+                            analysis easier to understand through machine
+                            learning and an interactive web interface.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Contact Details -->
+
+                <div class="contact-details">
+
+
+                    <div class="contact-detail">
+
+                        <span class="detail-number">
+                            01
+                        </span>
+
+                        <div>
+
+                            <h4>
+                                Project
+                            </h4>
+
+                            <p>
+                                ChurnSense AI
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="contact-detail">
+
+                        <span class="detail-number">
+                            02
+                        </span>
+
+                        <div>
+
+                            <h4>
+                                Technology
+                            </h4>
+
+                            <p>
+                                Python · Flask · Machine Learning
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="contact-detail">
+
+                        <span class="detail-number">
+                            03
+                        </span>
+
+                        <div>
+
+                            <h4>
+                                Purpose
+                            </h4>
+
+                            <p>
+                                Customer Churn Prediction & Analysis
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Contact Form -->
+
+            <div class="contact-form-wrapper">
+
+                <form action="/contact" method="POST" class="contact-form">
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label for="name">
+                                Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Enter your name"
+                                required
+                            >
+
+                        </div>
+
+
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="Enter your email"
+                                required
+                            >
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="subject">
+                            Subject
+                        </label>
+
+                        <input
+                            type="text"
+                            id="subject"
+                            name="subject"
+                            placeholder="What would you like to discuss?"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="message">
+                            Message
+                        </label>
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="6"
+                            placeholder="Write your message here..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+
+                    <button type="submit" class="contact-submit">
+
+                        Send Message
+
+                        <span>
+                            →
+                        </span>
+
+                    </button>
+
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% endblock %}

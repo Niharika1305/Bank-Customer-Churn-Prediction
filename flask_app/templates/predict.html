@@ -1,0 +1,554 @@
+{% extends "base.html" %}
+
+{% block title %}Predict Customer Churn | ChurnSense AI{% endblock %}
+
+{% block content %}
+
+<section class="prediction-page">
+
+    <!-- ============================= -->
+    <!-- PAGE HEADER -->
+    <!-- ============================= -->
+
+    <div class="prediction-header">
+
+        <div class="header-badge">
+            AI-POWERED PREDICTION
+        </div>
+
+        <h1>Customer Churn Prediction</h1>
+
+        <p>
+            Analyze customer behavior and predict the likelihood of churn
+            using advanced machine learning models.
+        </p>
+
+    </div>
+
+
+    <!-- ============================= -->
+    <!-- PREDICTION FORM -->
+    <!-- ============================= -->
+
+    <form action="/predict" method="POST" class="prediction-form">
+
+
+        <!-- ============================= -->
+        <!-- MODEL SELECTION -->
+        <!-- ============================= -->
+
+        <div class="form-card">
+
+            <div class="card-header">
+
+                <div class="card-icon model-icon">
+                    ◈
+                </div>
+
+                <div>
+                    <h2>Select Prediction Model</h2>
+
+                    <p>
+                        Choose a machine learning model or compare all available models.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="form-group full-width">
+
+                <label for="model">
+                    Prediction Model
+                </label>
+
+                <div class="select-wrapper">
+
+                    <select
+                        name="model"
+                        id="model"
+                        required
+                    >
+
+                        <option value="" disabled selected>
+                            Select Prediction Model
+                        </option>
+
+
+                        <!-- Compare All Models -->
+                        <option value="all_models">
+                            Compare All Models
+                        </option>
+
+
+                        <!-- Individual Models -->
+                        {% for key, name in models.items() %}
+
+                            {% if key != "all_models" %}
+
+                                <option value="{{ key }}">
+                                    {{ name }}
+                                </option>
+
+                            {% endif %}
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <small class="field-help">
+                    Compare all models to get a combined prediction and model-wise results.
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <!-- ============================= -->
+        <!-- CUSTOMER INFORMATION -->
+        <!-- ============================= -->
+
+        <div class="form-card">
+
+            <div class="card-header">
+
+                <div class="card-icon customer-icon">
+                    ◉
+                </div>
+
+                <div>
+
+                    <h2>Customer Information</h2>
+
+                    <p>
+                        Enter the customer's demographic and account information.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ============================= -->
+            <!-- BASIC INFORMATION -->
+            <!-- ============================= -->
+
+            <div class="subsection-title">
+
+                <span>01</span>
+
+                Basic Information
+
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <!-- ============================= -->
+                <!-- CREDIT SCORE -->
+                <!-- ============================= -->
+
+                <div class="form-group">
+
+                    <label for="credit_score">
+                        Credit Score
+                    </label>
+
+                    <input
+                        type="number"
+                        id="credit_score"
+                        name="credit_score"
+                        placeholder="e.g. 650"
+                        min="300"
+                        max="850"
+                        required
+                    >
+
+                    <small class="field-help">
+                        Enter a value between 300 and 850.
+                    </small>
+
+                </div>
+
+
+                <!-- ============================= -->
+                <!-- GENDER -->
+                <!-- ============================= -->
+
+                <div class="form-group">
+
+                    <label for="gender">
+                        Gender
+                    </label>
+
+                    <div class="select-wrapper">
+
+                        <select
+                            name="gender"
+                            id="gender"
+                            required
+                        >
+
+                            <option value="" disabled selected>
+                                Select Gender
+                            </option>
+
+                            <!-- app.py expects Male/Female -->
+
+                            <option value="Female">
+                                Female
+                            </option>
+
+                            <option value="Male">
+                                Male
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ============================= -->
+                <!-- AGE -->
+                <!-- ============================= -->
+
+                <div class="form-group">
+
+                    <label for="age">
+                        Age
+                    </label>
+
+                    <input
+                        type="number"
+                        id="age"
+                        name="age"
+                        placeholder="e.g. 35"
+                        min="18"
+                        max="100"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ============================= -->
+                <!-- TENURE -->
+                <!-- ============================= -->
+
+                <div class="form-group">
+
+                    <label for="tenure">
+                        Tenure
+                    </label>
+
+                    <input
+                        type="number"
+                        id="tenure"
+                        name="tenure"
+                        placeholder="e.g. 5"
+                        min="0"
+                        max="10"
+                        required
+                    >
+
+                    <small class="field-help">
+                        Number of years with the bank.
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <!-- ============================= -->
+            <!-- FINANCIAL INFORMATION -->
+            <!-- ============================= -->
+
+            <div class="subsection-title">
+
+                <span>02</span>
+
+                Financial Information
+
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <!-- ============================= -->
+                <!-- BALANCE -->
+                <!-- ============================= -->
+
+                <div class="form-group">
+
+                    <label for="balance">
+                        Account Balance
+                    </label>
+
+                    <input
+                        type="number"
+                        id="balance"
+                        name="balance"
+                        placeholder="e.g. 50000"
+                        min="0"
+                        step="0.01"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ============================= -->
+                <!-- NUMBER OF PRODUCTS -->
+                <!-- ============================= -->
+
+                <div class="form-group">
+
+                    <label for="num_products">
+                        Number of Products
+                    </label>
+
+                    <input
+                        type="number"
+                        id="num_products"
+                        name="num_products"
+                        placeholder="e.g. 2"
+                        min="1"
+                        max="10"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ============================= -->
+                <!-- ESTIMATED SALARY -->
+                <!-- ============================= -->
+
+                <div class="form-group">
+
+                    <label for="estimated_salary">
+                        Estimated Salary
+                    </label>
+
+                    <input
+                        type="number"
+                        id="estimated_salary"
+                        name="estimated_salary"
+                        placeholder="e.g. 100000"
+                        min="0"
+                        step="0.01"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- ============================= -->
+                <!-- GEOGRAPHY -->
+                <!-- ============================= -->
+
+                <div class="form-group">
+
+                    <label for="geography">
+                        Geography
+                    </label>
+
+                    <div class="select-wrapper">
+
+                        <select
+                            name="geography"
+                            id="geography"
+                            required
+                        >
+
+                            <option value="" disabled selected>
+                                Select Country
+                            </option>
+
+                            <option value="France">
+                                France
+                            </option>
+
+                            <option value="Germany">
+                                Germany
+                            </option>
+
+                            <option value="Spain">
+                                Spain
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ============================= -->
+            <!-- ACCOUNT INFORMATION -->
+            <!-- ============================= -->
+
+            <div class="subsection-title">
+
+                <span>03</span>
+
+                Account Information
+
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <!-- ============================= -->
+                <!-- HAS CREDIT CARD -->
+                <!-- ============================= -->
+
+                <div class="form-group">
+
+                    <label for="has_credit_card">
+                        Has Credit Card
+                    </label>
+
+                    <div class="select-wrapper">
+
+                        <select
+                            name="has_credit_card"
+                            id="has_credit_card"
+                            required
+                        >
+
+                            <option value="" disabled selected>
+                                Select Option
+                            </option>
+
+                            <option value="1">
+                                Yes
+                            </option>
+
+                            <option value="0">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ============================= -->
+                <!-- ACTIVE MEMBER -->
+                <!-- ============================= -->
+
+                <div class="form-group">
+
+                    <label for="active_member">
+                        Active Member
+                    </label>
+
+                    <div class="select-wrapper">
+
+                        <select
+                            name="active_member"
+                            id="active_member"
+                            required
+                        >
+
+                            <option value="" disabled selected>
+                                Select Option
+                            </option>
+
+                            <option value="1">
+                                Yes
+                            </option>
+
+                            <option value="0">
+                                No
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ============================= -->
+            <!-- INFORMATION NOTICE -->
+            <!-- ============================= -->
+
+            <div class="prediction-notice">
+
+                <div class="notice-icon">
+                    ✦
+                </div>
+
+                <div>
+
+                    <strong>
+                        AI Prediction
+                    </strong>
+
+                    <p>
+                        Your information will be analyzed by the selected
+                        machine learning model to estimate the customer's
+                        churn risk.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ============================= -->
+        <!-- FORM ACTIONS -->
+        <!-- ============================= -->
+
+        <div class="form-actions">
+
+            <button
+                type="submit"
+                class="predict-button"
+            >
+
+                <span>
+                    Generate Prediction
+                </span>
+
+                <span class="button-arrow">
+                    →
+                </span>
+
+            </button>
+
+
+            <a
+                href="/"
+                class="cancel-button"
+            >
+                Cancel
+            </a>
+
+        </div>
+
+
+    </form>
+
+</section>
+
+{% endblock %}
